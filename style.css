@@ -1,0 +1,868 @@
+html {
+    user-select: none;
+}
+
+body {
+    margin: 0;
+    font-family: 'Days One', 'sans-serif';
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+
+    background-image: url('./img/pokemon_bgr.jpg');
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: auto;
+    width: auto;
+    padding: 2rem 5rem 0 2rem;
+}
+
+*::-webkit-scrollbar {
+    width: 8px;
+    height: auto;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: rgb(71, 71, 71);
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 10px;
+}
+
+.body {
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+}
+
+:root {
+    font-size: calc(14px + (24 - 16)*(100vw - 320px)/(1920 - 320));
+}
+
+button,
+input {
+    font: 1em Hind;
+    line-height: 1.5em;
+    font-family: inherit;
+}
+
+input {
+    color: #171717;
+}
+
+.search-bar {
+    display: flex;
+}
+
+.search-bar input,
+.search-btn,
+.search-btn:before,
+.search-btn:after {
+    transition: all 0.4s ease-out;
+}
+
+.search-bar input,
+.search-btn {
+    width: 3em;
+    height: 3em;
+    border: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.search-bar input:invalid:not(:focus),
+.search-btn {
+    cursor: pointer;
+}
+
+.search-bar,
+.search-bar input:focus,
+.search-bar input:valid {
+    align-items: center;
+    width: 100%;
+}
+
+.search-bar input:focus {
+    height: 2em;
+    width: 14em;
+}
+
+.search-bar input:focus,
+.search-bar input:not(:focus)+.search-btn:focus {
+    outline: transparent;
+}
+
+.search-bar {
+    margin: auto;
+    padding: 1.5em;
+    justify-content: flex-end;
+    max-width: 30em;
+}
+
+.search-bar input {
+    background: transparent;
+    border-radius: 1.5em;
+    box-shadow: 0 0 0 0.4em #171717 inset;
+    padding: 0.75em;
+    transform: translate(0.5em, 0.5em) scale(0.5);
+    transform-origin: 100% 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.search-bar input::-webkit-search-decoration {
+    -webkit-appearance: none;
+}
+
+.search-bar input:focus,
+.search-bar input:valid {
+    background: #fff;
+    border-radius: 0.375em;
+    box-shadow: 0 0 0 0.1em #d9d9d9 inset;
+    transform: scale(1);
+}
+
+.search-btn {
+    background: #171717;
+    border-radius: 0 0.75em 0.75em 0 / 0 1.5em 1.5em 0;
+    padding: 0.75em;
+    position: relative;
+    transform: translate(0.25em, 0.25em) rotate(45deg) scale(0.25, 0.125);
+    transform-origin: 0 50%;
+}
+
+.search-btn:before,
+.search-btn:after {
+    content: "";
+    display: block;
+    opacity: 0;
+    position: absolute;
+}
+
+.search-btn:before {
+    border-radius: 50%;
+    box-shadow: 0 0 0 0.2em #f1f1f1 inset;
+    top: 0.75em;
+    left: 0.75em;
+    width: 1.2em;
+    height: 1.2em;
+}
+
+.search-btn:after {
+    background: #f1f1f1;
+    border-radius: 0 0.25em 0.25em 0;
+    top: 51%;
+    left: 51%;
+    width: 0.75em;
+    height: 0.25em;
+    transform: translate(0.2em, 0) rotate(45deg);
+    transform-origin: 0 50%;
+}
+
+.search-btn span {
+    display: inline-block;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+}
+
+/* Active state */
+.search-bar input:focus+.search-btn,
+.search-bar input:valid+.search-btn {
+    transform: scale(1);
+    background: transparent;
+}
+
+.search-bar input:focus+.search-btn:before,
+.search-bar input:focus+.search-btn:after,
+.search-bar input:valid+.search-btn:before,
+.search-bar input:valid+.search-btn:after {
+    opacity: 1;
+}
+
+.search-bar input:focus+.search-btn:active,
+.search-bar input:valid+.search-btn:active {
+    transform: translateY(1px);
+}
+
+input {
+    color: #f1f1f1;
+}
+
+.search-bar input {
+    box-shadow: 0 0 0 0.4em #f1f1f1 inset;
+}
+
+.search-bar input:focus,
+.search-bar input:valid {
+    background: transparent;
+    box-shadow: 0 0 0 0.1em #ffffff23 inset;
+}
+
+.search-btn {
+    background: #f1f1f1;
+}
+
+#content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    width: auto;
+    height: auto;
+    padding: 0 10px 0 10px;
+}
+
+.pokeBox {
+    width: 380px;
+    height: 200px;
+    border-radius: 10px;
+    margin: 0 10px 20px 10px;
+    transform: scale(1);
+    transition: transform 0.3s;
+}
+
+.pokeBoxDetails {
+    width: 400px;
+    height: 700px;
+    border-radius: 30px;
+}
+
+.showDetails {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.contentBoxDetails {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 18px;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.shadowDetails {
+    box-shadow: 0 0 14px rgba(0, 0, 0, 1);
+}
+
+.arrowRight {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    padding: 20px 10px 20px 32px;
+    margin-left: 40px;
+    z-index: 9999;
+}
+
+#rightBtn:disabled {
+    opacity: 0.3;
+    cursor: default;
+    z-index: 9999;
+}
+
+#leftBtn:disabled {
+    opacity: 0.3;
+    cursor: default;
+    z-index: 9999;
+}
+
+.arrowLeft {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    padding: 20px 32px 20px 10px;
+    margin-right: 40px;
+    z-index: 9999;
+}
+
+.elementBoxDetails {
+    display: flex;
+    padding-right: 5px;
+    gap: 8px;
+    margin-bottom: 220px;
+}
+
+.pokemonImgDetails {
+    position: absolute;
+    z-index: 1;
+    top: 13%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 270px;
+    height: auto;
+}
+
+.nameDetails {
+    display: block;
+    margin: 0;
+    font-size: 36px;
+    padding-left: 10px;
+    text-transform: capitalize;
+}
+
+.namePlusIdBox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.infoBox {
+    position: relative;
+    background-color: #d9d9d9;
+    width: 400px;
+    height: 360px;
+    margin-left: -18px;
+    border-radius: 30px;
+    box-shadow: 0 -10px 100px -1px rgba(0, 0, 0, 1);
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    padding-top: 10px;
+}
+
+.tab {
+    background: none;
+    border: none;
+    padding: 10px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: color 0.3s;
+    outline: none;
+    white-space: nowrap;
+}
+
+.tab:hover {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.underline {
+    height: 2px;
+    background-color: deepskyblue;
+    position: absolute;
+    bottom: 5px;
+    width: 0;
+    transition: width 0.3s, left 0.3s;
+}
+
+.pokeBox:hover {
+    transform: scale(1.08);
+    cursor: pointer;
+}
+
+.pokeBox:hover img {
+    transform: scale(1.08);
+}
+
+.shadow {
+    box-shadow: 5px 5px 4px rgba(0, 0, 0, 1);
+}
+
+.contentBox {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 18px;
+    box-sizing: border-box;
+}
+
+.h2 {
+    margin: 0;
+    font-size: 28px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    text-transform: capitalize;
+}
+
+.elementBox {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: max-content;
+    overflow: hidden;
+    height: 75%;
+    gap: 5px;
+    padding-right: 5px;
+}
+
+.justifyCenter {
+    display: flex;
+    justify-content: center;
+}
+
+.scroll {
+    overflow-y: scroll;
+}
+
+.scroll::-webkit-scrollbar {
+    width: 5px;
+    height: auto;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    background-color: grey;
+    border-radius: 10px;
+}
+
+.scroll::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 10px;
+}
+
+.elementTxt {
+    font-size: 16px;
+    text-align: center;
+    width: auto;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 20px;
+    border-radius: 20px;
+    white-space: nowrap;
+    text-transform: capitalize;
+}
+
+.textTransform {
+    text-transform: capitalize;
+}
+
+.pokemonImg {
+    position: absolute;
+    top: 12px;
+    right: 0;
+    width: 180px;
+    height: auto;
+    transform: scale(1);
+    transition: transform 0.3s;
+}
+
+.statsDiv {
+    display: flex;
+    padding: 10px 14px 0 14px;
+    gap: 10px;
+}
+
+.aboutDiv {
+    display: flex;
+    padding: 10px 14px 0 14px;
+    gap: 20px;
+}
+
+.flavorDiv {
+    position: absolute;
+    text-align: center;
+    bottom: 0;
+    left: 0;
+    padding: 0 14px 0 14px;
+}
+
+#flavorTxt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 132px;
+}
+
+.flavorTxt {
+    font-size: 16px;
+    color: rgba(0, 0, 0, 1);
+}
+
+.titleDetails {
+    color: rgb(124, 124, 124);
+    white-space: nowrap;
+}
+
+.shinyDiv {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 50%;
+}
+
+.shinyDivLoad {
+    display: flex;
+    justify-content: space-between;
+    width: 145%;
+    height: 50%;
+}
+
+.imgShinyDiv {
+    width: 90%;
+    height: auto;
+}
+
+.imgPlusTitleShiny {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.lookTxt {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.5);
+    margin-bottom: -16px;
+    margin-top: 20px;
+}
+
+.statsElementsBox {
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    gap: 10px;
+}
+
+.statsLine {
+    width: 100%;
+    margin-top: 7px;
+}
+
+.progressBar {
+    width: 100%;
+    height: 8px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.progressGreen {
+    height: 100%;
+    background-color: #e03c3c;
+    width: 0%;
+}
+
+.spinner {
+    animation: rotate 2s linear infinite;
+    transform-origin: center center;
+}
+
+.path {
+    stroke: white;
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: 0;
+    animation: dash 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes dash {
+    0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+    }
+
+    50% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -35px;
+    }
+
+    100% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -124px;
+    }
+}
+
+#loadingScreen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    /* Halbtransparenter schwarzer Hintergrund */
+    z-index: 1000;
+    /* Stellen Sie sicher, dass der Ladescreen über allen anderen Elementen angezeigt wird */
+}
+
+.loadingScreen2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+#loadingImage2 {
+    width: 200px;
+}
+
+#loadingImage {
+    width: 200px;
+}
+
+.loadShinyContain {
+    display: flex;
+    width: 100%;
+    height: auto;
+}
+
+.movesContain {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    overflow-y: scroll;
+    width: 94%;
+    height: 50%;
+    padding: 10px 5px 0 14px;
+}
+
+.moveTxt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    white-space: nowrap;
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 2px 6px 2px 6px;
+    font-size: 14px;
+    border-radius: 20px;
+    line-height: 2;
+}
+
+.loadBtnContain {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    scale: 1;
+}
+
+.moreBtn {
+    box-shadow: 4px 4px 4px #171717;
+    transition: transform 0.3s;
+}
+
+.moreBtn:hover {
+    transform: scale(1.10);
+    cursor: pointer;
+}
+
+@media (max-width:730px) {
+
+    .arrowRight {
+        display: block;
+        position: absolute;
+        top: 790px;
+        right: 25px;
+        padding: 20px 10px 20px 32px;
+        margin-left: 0;
+    }
+
+    .arrowLeft {
+        display: block;
+        position: absolute;
+        top: 790px;
+        left: 25px;
+        padding: 20px 32px 20px 10px;
+        margin-right: 0;
+    }
+}
+
+@media (max-width:860px) {
+    .pokeBox {
+        width: 320px;
+        margin: 0;
+    }
+
+    #content {
+        gap: 18px;
+    }
+}
+
+@media (max-width:655px) {
+
+    .showDetails {
+        background-color: rgba(0, 0, 0, 0.5);
+        padding-bottom: 100px;
+        margin-top: -100px;
+    }
+
+    .pokeBoxDetails {
+        width: 290px;
+        height: 570px;
+    }
+
+    .pokemonImgDetails {
+        width: 200px;
+        top: 12%;
+    }
+
+    .namePlusIdBox {
+        font-size: 18px;
+    }
+
+    .nameDetails {
+        font-size: 26px;
+    }
+
+    .elementTxt {
+        font-size: 14px;
+        padding: 6px 16px;
+    }
+
+    .infoBox {
+        width: 290px;
+        height: 320px;
+    }
+
+    .elementBoxDetails {
+        margin-bottom: 150px;
+    }
+
+    .tabs {
+        padding-top: 10px;
+    }
+
+    .tab {
+        padding: 2px 6px;
+        font-size: 14px;
+    }
+
+    .underline {
+        bottom: 0;
+    }
+
+    .statsElementsBox {
+        font-size: 14px;
+    }
+
+    .statsDiv {
+        padding: 20px 14px 0 14px;
+    }
+
+    .aboutDiv {
+        padding: 20px 14px 0 14px;
+    }
+
+    .shinyDiv {
+        height: 55%;
+    }
+
+    .statsLine {
+        margin-top: 6px;
+        height: 159px;
+    }
+
+    .flavorTxt {
+        font-size: 14px;
+    }
+
+    #flavorTxt {
+        height: 100px;
+    }
+
+    .lookTxt {
+        margin-bottom: -5px;
+    }
+
+    .moveTxt {
+        font-size: 14px;
+    }
+
+    .movesContain {
+        height: 55%;
+        padding: 20px 14px 0 14px;
+    }
+
+    .arrowRight {
+        display: block;
+        position: absolute;
+        right: 25px;
+        padding: 20px 10px 20px 32px;
+        margin-left: 0;
+    }
+
+    .arrowLeft {
+        display: block;
+        position: absolute;
+        left: 25px;
+        padding: 20px 32px 20px 10px;
+        margin-right: 0;
+    }
+}
+
+@media (max-width:530px) {
+    nav {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0;
+        margin-top: 50px;
+        width: 100%;
+    }
+
+    nav svg {
+        margin-bottom: -40px;
+    }
+
+    .search-bar {
+        justify-content: center;
+        padding: 0;
+    }
+
+    .searchContain {
+        width: 100%;
+        height: 80px;
+    }
+}
+
+.no-scroll {
+    overflow-y: hidden;
+}
+
+.d-none {
+    display: none;
+}
