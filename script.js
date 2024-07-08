@@ -1,5 +1,6 @@
 let setPokemonsCount = 50;
 
+
 document.addEventListener('DOMContentLoaded', function () {
     loadPokemon();
 });
@@ -12,7 +13,8 @@ document.addEventListener('DOMContentLoaded', function () {
  */
 async function getPokemon(count) {
     let url = `https://pokeapi.co/api/v2/pokemon/${count}`;
-    let response = await fetch(url);
+    let myRequest = new Request(url, { mode: 'no-cors' });
+    let response = await fetch(myRequest);
     return await response.json();
 }
 
@@ -24,7 +26,8 @@ async function getPokemon(count) {
  */
 async function getPokemonSpecies(count) {
     let url = `https://pokeapi.co/api/v2/pokemon-species/${count}`;
-    let response = await fetch(url);
+    let myRequest = new Request(url, { mode: 'no-cors' });
+    let response = await fetch(myRequest);
     return await response.json();
 }
 
