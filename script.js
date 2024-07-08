@@ -13,9 +13,10 @@ document.addEventListener('DOMContentLoaded', function () {
  */
 async function getPokemon(count) {
     let url = `https://pokeapi.co/api/v2/pokemon/${count}`;
-    let myRequest = new Request(url, { mode: 'no-cors' });
+    let myRequest = new Request(url, { mode: 'cors' });
     let response = await fetch(myRequest);
-    return await response.json();
+    let respJson = await response.json();
+    return respJson;
 }
 
 /**
@@ -26,9 +27,10 @@ async function getPokemon(count) {
  */
 async function getPokemonSpecies(count) {
     let url = `https://pokeapi.co/api/v2/pokemon-species/${count}`;
-    let myRequest = new Request(url, { mode: 'no-cors' });
+    let myRequest = new Request(url, { mode: 'cors' });
     let response = await fetch(myRequest);
-    return await response.json();
+    let respJson = await response.json();
+    return respJson;
 }
 
 /**
