@@ -5,21 +5,7 @@ html {
 body {
     margin: 0;
     font-family: 'Days One', 'sans-serif';
-}
-
-body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: -1;
-
-    background-image: url('./img/pokemon_bgr.jpg');
-    background-size: cover;
-    background-position: top;
-    background-repeat: no-repeat;
+    background-color: rgb(13, 19, 31);
 }
 
 nav {
